@@ -1,0 +1,6 @@
+<resources>
+    <string name="app_name">FaultCall</string>
+    <string name="tagline">Your voice on the court</string>
+    <string name="match_in_progress">FaultCall Match Active</string>
+    <string name="match_in_progress_desc">Listening for Galaxy Watch8 commands and announcing scores</string>
+</resources>
