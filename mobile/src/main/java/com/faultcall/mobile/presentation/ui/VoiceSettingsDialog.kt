@@ -1,23 +1,30 @@
 package com.faultcall.mobile.presentation.ui
 
-import androidx.compose.foundation.clickable
+import androidx.compose.foundation.background
+import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.rememberScrollState
+import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.automirrored.filled.VolumeUp
 import androidx.compose.material.icons.filled.RecordVoiceOver
 import androidx.compose.material.icons.filled.Visibility
 import androidx.compose.material.icons.filled.VisibilityOff
-import androidx.compose.material.icons.filled.VolumeUp
 import androidx.compose.material3.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.compose.ui.text.input.VisualTransformation
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.compose.ui.window.Dialog
+import androidx.compose.ui.window.DialogProperties
 import com.faultcall.mobile.data.VoiceSettings
 import com.faultcall.mobile.presentation.theme.*
 
@@ -43,182 +50,400 @@ fun VoiceSettingsDialog(
         Pair("Adam (Baritone Shout)", "pNInz6obpgDQGcFmaJgB")
     )
 
-    AlertDialog(
+    Dialog(
         onDismissRequest = onDismiss,
-        title = {
-            Row(verticalAlignment = Alignment.CenterVertically) {
-                Icon(Icons.Default.RecordVoiceOver, contentDescription = null, tint = TennisBallGreen)
-                Spacer(Modifier.width(8.dp))
-                Text("FaultCall Voice Settings", fontWeight = FontWeight.Bold, color = TextPrimary)
-            }
-        },
-        text = {
-            Column(verticalArrangement = Arrangement.spacedBy(12.dp)) {
-                // Signature Profile Card
-                Surface(
-                    color = CharcoalCard,
-                    shape = RoundedCornerShape(10.dp),
-                    modifier = Modifier.fillMaxWidth()
+        properties = DialogProperties(usePlatformDefaultWidth = false)
+    ) {
+        Surface(
+            modifier = Modifier
+                .fillMaxWidth(0.94f)
+                .padding(vertical = 16.dp)
+                .clip(RoundedCornerShape(32.dp))
+                .border(1.dp, OneUiStroke, RoundedCornerShape(32.dp)),
+            color = OneUiSurface,
+            tonalElevation = 8.dp
+        ) {
+            Column(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .padding(22.dp)
+                    .verticalScroll(rememberScrollState()),
+                verticalArrangement = Arrangement.spacedBy(16.dp),
+                horizontalAlignment = Alignment.CenterHorizontally
+            ) {
+                // One UI Sheet Handle
+                Box(
+                    modifier = Modifier
+                        .width(42.dp)
+                        .height(4.dp)
+                        .clip(CircleShape)
+                        .background(OneUiStrokeGlow)
+                )
+
+                // Header
+                Row(
+                    modifier = Modifier.fillMaxWidth(),
+                    verticalAlignment = Alignment.CenterVertically
                 ) {
-                    Column(Modifier.padding(12.dp)) {
-                        Text(
-                            "SIGNATURE IDENTITY: THE AUTHORITY",
-                            fontSize = 11.sp,
-                            fontWeight = FontWeight.Black,
-                            color = TennisBallGreen
+                    Box(
+                        modifier = Modifier
+                            .size(44.dp)
+                            .clip(RoundedCornerShape(14.dp))
+                            .background(TennisVoltDim),
+                        contentAlignment = Alignment.Center
+                    ) {
+                        Icon(
+                            imageVector = Icons.Default.RecordVoiceOver,
+                            contentDescription = null,
+                            tint = TennisVolt,
+                            modifier = Modifier.size(24.dp)
                         )
-                        Spacer(Modifier.height(4.dp))
+                    }
+                    Spacer(Modifier.width(14.dp))
+                    Column {
                         Text(
-                            "Centre Court chair umpire · Refined British English (RP) · Deep resonant delivery · Powerful shouts for line calls.",
+                            text = "Voice & Audio Engine",
+                            fontSize = 18.sp,
+                            fontWeight = FontWeight.Bold,
+                            color = TextPrimary
+                        )
+                        Text(
+                            text = "One UI 8 Fluid Acoustic System",
                             fontSize = 11.sp,
                             color = TextSecondary
                         )
                     }
                 }
 
-                // ElevenLabs AI Engine Section
-                Column {
+                // Signature Identity Card
+                Surface(
+                    color = OneUiSurfaceVariant,
+                    shape = RoundedCornerShape(20.dp),
+                    border = androidx.compose.foundation.BorderStroke(1.dp, OneUiStroke),
+                    modifier = Modifier.fillMaxWidth()
+                ) {
+                    Column(Modifier.padding(14.dp)) {
+                        Row(verticalAlignment = Alignment.CenterVertically) {
+                            Box(
+                                modifier = Modifier
+                                    .clip(RoundedCornerShape(6.dp))
+                                    .background(TennisVolt)
+                                    .padding(horizontal = 6.dp, vertical = 2.dp)
+                            ) {
+                                Text(
+                                    "THE AUTHORITY",
+                                    fontSize = 10.sp,
+                                    fontWeight = FontWeight.Black,
+                                    color = Color.Black
+                                )
+                            }
+                            Spacer(Modifier.width(8.dp))
+                            Text(
+                                "Wimbledon RP Accent",
+                                fontSize = 11.sp,
+                                fontWeight = FontWeight.SemiBold,
+                                color = TennisVolt
+                            )
+                        }
+                        Spacer(Modifier.height(6.dp))
+                        Text(
+                            "Centre Court chair umpire · Crisp RP British English · Resonant acoustic projection · Dramatic shouts on line calls.",
+                            fontSize = 11.sp,
+                            lineHeight = 16.sp,
+                            color = TextSecondary
+                        )
+                    }
+                }
+
+                // ElevenLabs AI Section
+                Surface(
+                    color = OneUiSurfaceVariant,
+                    shape = RoundedCornerShape(20.dp),
+                    border = androidx.compose.foundation.BorderStroke(1.dp, OneUiStroke),
+                    modifier = Modifier.fillMaxWidth()
+                ) {
+                    Column(Modifier.padding(14.dp), verticalArrangement = Arrangement.spacedBy(10.dp)) {
+                        Row(
+                            modifier = Modifier.fillMaxWidth(),
+                            verticalAlignment = Alignment.CenterVertically,
+                            horizontalArrangement = Arrangement.SpaceBetween
+                        ) {
+                            Column(modifier = Modifier.weight(1f)) {
+                                Text(
+                                    "ElevenLabs Neural Voice",
+                                    fontSize = 14.sp,
+                                    fontWeight = FontWeight.Bold,
+                                    color = TextPrimary
+                                )
+                                Text(
+                                    "Hyper-realistic human umpire speech",
+                                    fontSize = 11.sp,
+                                    color = AccentCyan
+                                )
+                            }
+                            Switch(
+                                checked = useElevenLabs,
+                                onCheckedChange = { useElevenLabs = it },
+                                colors = SwitchDefaults.colors(
+                                    checkedThumbColor = Color.Black,
+                                    checkedTrackColor = TennisVolt,
+                                    uncheckedThumbColor = TextMuted,
+                                    uncheckedTrackColor = OneUiStroke
+                                )
+                            )
+                        }
+
+                        if (useElevenLabs) {
+                            OutlinedTextField(
+                                value = elevenLabsApiKey,
+                                onValueChange = { elevenLabsApiKey = it },
+                                label = { Text("ElevenLabs API Key", fontSize = 12.sp) },
+                                placeholder = { Text("Paste key from elevenlabs.io", fontSize = 12.sp) },
+                                singleLine = true,
+                                visualTransformation = if (showApiKey) VisualTransformation.None else PasswordVisualTransformation(),
+                                trailingIcon = {
+                                    IconButton(onClick = { showApiKey = !showApiKey }) {
+                                        Icon(
+                                            if (showApiKey) Icons.Default.VisibilityOff else Icons.Default.Visibility,
+                                            contentDescription = "Toggle visibility",
+                                            tint = TextSecondary
+                                        )
+                                    }
+                                },
+                                shape = RoundedCornerShape(14.dp),
+                                colors = OutlinedTextFieldDefaults.colors(
+                                    focusedBorderColor = TennisVolt,
+                                    unfocusedBorderColor = OneUiStroke,
+                                    focusedLabelColor = TennisVolt,
+                                    unfocusedLabelColor = TextSecondary,
+                                    cursorColor = TennisVolt
+                                ),
+                                modifier = Modifier.fillMaxWidth()
+                            )
+
+                            Text(
+                                "Voice Model Preset:",
+                                fontSize = 11.sp,
+                                fontWeight = FontWeight.SemiBold,
+                                color = TextSecondary
+                            )
+
+                            Row(
+                                horizontalArrangement = Arrangement.spacedBy(6.dp),
+                                modifier = Modifier.fillMaxWidth()
+                            ) {
+                                presetVoices.forEach { (name, id) ->
+                                    val selected = elevenLabsVoiceId == id
+                                    FilterChip(
+                                        selected = selected,
+                                        onClick = { elevenLabsVoiceId = id },
+                                        label = {
+                                            Text(
+                                                name.substringBefore(" "),
+                                                fontSize = 11.sp,
+                                                fontWeight = if (selected) FontWeight.Bold else FontWeight.Normal
+                                            )
+                                        },
+                                        shape = RoundedCornerShape(12.dp),
+                                        colors = FilterChipDefaults.filterChipColors(
+                                            selectedContainerColor = CourtEmerald,
+                                            selectedLabelColor = Color.White,
+                                            containerColor = OneUiSurfaceElevated,
+                                            labelColor = TextSecondary
+                                        )
+                                    )
+                                }
+                            }
+
+                            Text(
+                                "Permanent disk cache saves quota: subsequent calls play instantly without internet.",
+                                fontSize = 10.sp,
+                                color = TextMuted
+                            )
+                        }
+                    }
+                }
+
+                // Speech Rate & Pitch Sliders
+                Surface(
+                    color = OneUiSurfaceVariant,
+                    shape = RoundedCornerShape(20.dp),
+                    border = androidx.compose.foundation.BorderStroke(1.dp, OneUiStroke),
+                    modifier = Modifier.fillMaxWidth()
+                ) {
+                    Column(Modifier.padding(14.dp), verticalArrangement = Arrangement.spacedBy(10.dp)) {
+                        // Rate
+                        Column {
+                            Row(
+                                modifier = Modifier.fillMaxWidth(),
+                                horizontalArrangement = Arrangement.SpaceBetween,
+                                verticalAlignment = Alignment.CenterVertically
+                            ) {
+                                Text("Speech Rate (TTS)", fontSize = 12.sp, color = TextPrimary)
+                                Box(
+                                    modifier = Modifier
+                                        .clip(RoundedCornerShape(8.dp))
+                                        .background(AccentCyanDim)
+                                        .padding(horizontal = 8.dp, vertical = 2.dp)
+                                ) {
+                                    Text(
+                                        "${"%.2f".format(rate)}x",
+                                        fontSize = 11.sp,
+                                        fontWeight = FontWeight.Bold,
+                                        color = AccentCyan
+                                    )
+                                }
+                            }
+                            Slider(
+                                value = rate,
+                                onValueChange = { rate = it },
+                                valueRange = 0.8f..1.4f,
+                                colors = SliderDefaults.colors(
+                                    thumbColor = AccentCyan,
+                                    activeTrackColor = AccentCyan,
+                                    inactiveTrackColor = OneUiStroke
+                                )
+                            )
+                        }
+
+                        HorizontalDivider(color = OneUiStroke)
+
+                        // Pitch
+                        Column {
+                            Row(
+                                modifier = Modifier.fillMaxWidth(),
+                                horizontalArrangement = Arrangement.SpaceBetween,
+                                verticalAlignment = Alignment.CenterVertically
+                            ) {
+                                Text("Pitch (Lower = Authoritative)", fontSize = 12.sp, color = TextPrimary)
+                                Box(
+                                    modifier = Modifier
+                                        .clip(RoundedCornerShape(8.dp))
+                                        .background(AccentCyanDim)
+                                        .padding(horizontal = 8.dp, vertical = 2.dp)
+                                ) {
+                                    Text(
+                                        "${"%.2f".format(pitch)}x",
+                                        fontSize = 11.sp,
+                                        fontWeight = FontWeight.Bold,
+                                        color = AccentCyan
+                                    )
+                                }
+                            }
+                            Slider(
+                                value = pitch,
+                                onValueChange = { pitch = it },
+                                valueRange = 0.7f..1.3f,
+                                colors = SliderDefaults.colors(
+                                    thumbColor = AccentCyan,
+                                    activeTrackColor = AccentCyan,
+                                    inactiveTrackColor = OneUiStroke
+                                )
+                            )
+                        }
+                    }
+                }
+
+                // Music Ducking Row
+                Surface(
+                    color = OneUiSurfaceVariant,
+                    shape = RoundedCornerShape(20.dp),
+                    border = androidx.compose.foundation.BorderStroke(1.dp, OneUiStroke),
+                    modifier = Modifier.fillMaxWidth()
+                ) {
                     Row(
-                        modifier = Modifier.fillMaxWidth(),
+                        modifier = Modifier
+                            .fillMaxWidth()
+                            .padding(14.dp),
                         verticalAlignment = Alignment.CenterVertically,
                         horizontalArrangement = Arrangement.SpaceBetween
                     ) {
-                        Column {
-                            Text("ElevenLabs Wimbledon Voice", fontSize = 13.sp, fontWeight = FontWeight.Bold, color = TextPrimary)
-                            Text("Authentic human British shouting umpire", fontSize = 10.sp, color = AccentCyan)
+                        Column(modifier = Modifier.weight(1f)) {
+                            Text(
+                                "Duck Background Music",
+                                fontSize = 13.sp,
+                                fontWeight = FontWeight.Bold,
+                                color = TextPrimary
+                            )
+                            Text(
+                                "Smoothly dips Spotify to 5% & restores instantly",
+                                fontSize = 11.sp,
+                                color = TextSecondary
+                            )
                         }
                         Switch(
-                            checked = useElevenLabs,
-                            onCheckedChange = { useElevenLabs = it }
-                        )
-                    }
-
-                    if (useElevenLabs) {
-                        Spacer(Modifier.height(8.dp))
-                        OutlinedTextField(
-                            value = elevenLabsApiKey,
-                            onValueChange = { elevenLabsApiKey = it },
-                            label = { Text("ElevenLabs API Key") },
-                            placeholder = { Text("Paste key from elevenlabs.io") },
-                            singleLine = true,
-                            visualTransformation = if (showApiKey) VisualTransformation.None else PasswordVisualTransformation(),
-                            trailingIcon = {
-                                IconButton(onClick = { showApiKey = !showApiKey }) {
-                                    Icon(
-                                        if (showApiKey) Icons.Default.VisibilityOff else Icons.Default.Visibility,
-                                        contentDescription = "Toggle key visibility",
-                                        tint = TextSecondary
-                                    )
-                                }
-                            },
-                            modifier = Modifier.fillMaxWidth()
-                        )
-
-                        Spacer(Modifier.height(6.dp))
-                        Text("Select Wimbledon Voice Model:", fontSize = 11.sp, fontWeight = FontWeight.SemiBold, color = TextSecondary)
-                        Row(
-                            horizontalArrangement = Arrangement.spacedBy(4.dp),
-                            modifier = Modifier.fillMaxWidth().padding(top = 4.dp)
-                        ) {
-                            presetVoices.forEach { (name, id) ->
-                                val selected = elevenLabsVoiceId == id
-                                FilterChip(
-                                    selected = selected,
-                                    onClick = { elevenLabsVoiceId = id },
-                                    label = { Text(name.substringBefore(" "), fontSize = 10.sp) },
-                                    colors = FilterChipDefaults.filterChipColors(
-                                        selectedContainerColor = CourtGreen,
-                                        selectedLabelColor = Color.White
-                                    )
-                                )
-                            }
-                        }
-
-                        Spacer(Modifier.height(4.dp))
-                        Text(
-                            "Free tier gives 10k chars/mo. FaultCall caches audio on disk permanently after the first call.",
-                            fontSize = 10.sp,
-                            color = TextMuted
+                            checked = duckMusic,
+                            onCheckedChange = { duckMusic = it },
+                            colors = SwitchDefaults.colors(
+                                checkedThumbColor = Color.Black,
+                                checkedTrackColor = TennisVolt,
+                                uncheckedThumbColor = TextMuted,
+                                uncheckedTrackColor = OneUiStroke
+                            )
                         )
                     }
                 }
 
-                Divider(color = Color(0xFF333333))
-
-                // Rate slider
-                Column {
-                    Row(
-                        modifier = Modifier.fillMaxWidth(),
-                        horizontalArrangement = Arrangement.SpaceBetween
-                    ) {
-                        Text("Speech Rate (TTS Fallback)", fontSize = 11.sp, color = TextPrimary)
-                        Text("${"%.2f".format(rate)}x", fontSize = 11.sp, fontWeight = FontWeight.Bold, color = AccentCyan)
-                    }
-                    Slider(
-                        value = rate,
-                        onValueChange = { rate = it },
-                        valueRange = 0.8f..1.4f
-                    )
-                }
-
-                // Pitch slider
-                Column {
-                    Row(
-                        modifier = Modifier.fillMaxWidth(),
-                        horizontalArrangement = Arrangement.SpaceBetween
-                    ) {
-                        Text("Pitch (Lower = More Authoritative)", fontSize = 11.sp, color = TextPrimary)
-                        Text("${"%.2f".format(pitch)}x", fontSize = 11.sp, fontWeight = FontWeight.Bold, color = AccentCyan)
-                    }
-                    Slider(
-                        value = pitch,
-                        onValueChange = { pitch = it },
-                        valueRange = 0.7f..1.3f
-                    )
-                }
-
-                Divider(color = Color(0xFF333333))
-
-                // Music Ducking / Attenuation Switch
-                Row(
-                    modifier = Modifier.fillMaxWidth(),
-                    verticalAlignment = Alignment.CenterVertically,
-                    horizontalArrangement = Arrangement.SpaceBetween
-                ) {
-                    Column(modifier = Modifier.weight(1f)) {
-                        Text("Duck Background Music", fontSize = 12.sp, fontWeight = FontWeight.Bold, color = TextPrimary)
-                        Text("Dips Spotify/music to ~5% during calls", fontSize = 10.sp, color = AccentCyan)
-                    }
-                    Switch(
-                        checked = duckMusic,
-                        onCheckedChange = { duckMusic = it }
-                    )
-                }
-
+                // Test Speaker Button
                 OutlinedButton(
                     onClick = onTest,
-                    modifier = Modifier.fillMaxWidth(),
-                    shape = RoundedCornerShape(8.dp)
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .height(46.dp),
+                    shape = RoundedCornerShape(16.dp),
+                    border = androidx.compose.foundation.BorderStroke(1.dp, OneUiStrokeGlow),
+                    colors = ButtonDefaults.outlinedButtonColors(
+                        containerColor = OneUiSurfaceElevated,
+                        contentColor = TextPrimary
+                    )
                 ) {
-                    Icon(Icons.Default.VolumeUp, contentDescription = null, modifier = Modifier.size(16.dp))
-                    Spacer(Modifier.width(6.dp))
-                    Text("TEST SPEAKER ANNOUNCEMENT", fontSize = 11.sp, fontWeight = FontWeight.Bold)
+                    Icon(
+                        imageVector = Icons.AutoMirrored.Filled.VolumeUp,
+                        contentDescription = null,
+                        tint = TennisVolt,
+                        modifier = Modifier.size(18.dp)
+                    )
+                    Spacer(Modifier.width(8.dp))
+                    Text(
+                        "TEST SPEAKER ANNOUNCEMENT",
+                        fontSize = 12.sp,
+                        fontWeight = FontWeight.Bold,
+                        color = TextPrimary
+                    )
+                }
+
+                // Bottom Action Buttons
+                Row(
+                    modifier = Modifier.fillMaxWidth(),
+                    horizontalArrangement = Arrangement.spacedBy(10.dp)
+                ) {
+                    TextButton(
+                        onClick = onDismiss,
+                        modifier = Modifier
+                            .weight(0.9f)
+                            .height(48.dp),
+                        shape = RoundedCornerShape(16.dp)
+                    ) {
+                        Text("Cancel", color = TextSecondary, fontSize = 14.sp, fontWeight = FontWeight.SemiBold)
+                    }
+
+                    Button(
+                        onClick = {
+                            onSave(rate, pitch, elevenLabsUrl, elevenLabsApiKey, elevenLabsVoiceId, useElevenLabs, duckMusic)
+                        },
+                        modifier = Modifier
+                            .weight(1.3f)
+                            .height(48.dp),
+                        shape = RoundedCornerShape(16.dp),
+                        colors = ButtonDefaults.buttonColors(
+                            containerColor = TennisVolt,
+                            contentColor = Color.Black
+                        )
+                    ) {
+                        Text("SAVE SETTINGS", fontWeight = FontWeight.Black, fontSize = 13.sp)
+                    }
                 }
             }
-        },
-        confirmButton = {
-            Button(
-                onClick = { onSave(rate, pitch, elevenLabsUrl, elevenLabsApiKey, elevenLabsVoiceId, useElevenLabs, duckMusic) },
-                colors = ButtonDefaults.buttonColors(containerColor = CourtGreen)
-            ) {
-                Text("SAVE SETTINGS")
-            }
-        },
-        dismissButton = {
-            TextButton(onClick = onDismiss) {
-                Text("Cancel", color = TextSecondary)
-            }
-        },
-        containerColor = CharcoalSurface
-    )
+        }
+    }
 }

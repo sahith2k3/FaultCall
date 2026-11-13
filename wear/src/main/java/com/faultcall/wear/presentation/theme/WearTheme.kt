@@ -5,21 +5,34 @@ import androidx.compose.ui.graphics.Color
 import androidx.wear.compose.material.Colors
 import androidx.wear.compose.material.MaterialTheme
 
-val WearCharcoal = Color(0xFF101010)
-val WearCharcoalCard = Color(0xFF1C1C1C)
-val WearTennisGreen = Color(0xFFC6FF00)
-val WearCourtGreen = Color(0xFF2E7D32)
-val WearFaultRed = Color(0xFFE53935)
+// Samsung One UI Watch 8/9 AMOLED Palette
+val WearOledBlack = Color(0xFF000000)
+val WearSurface = Color(0xFF12141A)
+val WearSurfaceElevated = Color(0xFF1B1E26)
+val WearStroke = Color(0xFF272C38)
+val WearStrokeGlow = Color(0xFF3B4254)
+
+val WearTennisVolt = Color(0xFFD6FF00)
+val WearCourtEmerald = Color(0xFF00C853)
+val WearFaultCoral = Color(0xFFFF3B30)
+val WearFaultCoralDark = Color(0xFFD32F2F)
 val WearAccentCyan = Color(0xFF00E5FF)
 val WearServerAmber = Color(0xFFFFB300)
 
+// Backward compatibility aliases
+val WearCharcoal = WearOledBlack
+val WearCharcoalCard = WearSurface
+val WearTennisGreen = WearTennisVolt
+val WearCourtGreen = WearCourtEmerald
+val WearFaultRed = WearFaultCoral
+
 val WearColors = Colors(
-    primary = WearTennisGreen,
-    primaryVariant = WearCourtGreen,
+    primary = WearTennisVolt,
+    primaryVariant = WearCourtEmerald,
     secondary = WearAccentCyan,
-    error = WearFaultRed,
-    background = WearCharcoal,
-    surface = WearCharcoalCard,
+    error = WearFaultCoral,
+    background = WearOledBlack,
+    surface = WearSurface,
     onPrimary = Color.Black,
     onSecondary = Color.Black,
     onError = Color.White

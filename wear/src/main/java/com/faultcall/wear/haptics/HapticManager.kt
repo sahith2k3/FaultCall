@@ -7,7 +7,8 @@ import android.os.Vibrator
 import android.os.VibratorManager
 
 /**
- * Manages crisp, tactile haptic feedback on Samsung Galaxy Watch8 for tennis court interactions.
+ * Manages crisp, tactile haptic feedback on Samsung Galaxy Watch (Watch5 Pro / Watch8)
+ * for high-speed tennis court interactions under intense match conditions.
  */
 class HapticManager(private val context: Context) {
 
@@ -20,7 +21,7 @@ class HapticManager(private val context: Context) {
     }
 
     /**
-     * Sharp, confident click for standard button taps (Score, Points).
+     * Sharp, confident click for standard button taps (Points, Score, Controls).
      */
     fun click() {
         try {
@@ -38,29 +39,61 @@ class HapticManager(private val context: Context) {
      */
     fun heavyFault() {
         try {
-            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
+                vibrator?.vibrate(VibrationEffect.createPredefined(VibrationEffect.EFFECT_HEAVY_CLICK))
+            } else if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
                 vibrator?.vibrate(
-                    VibrationEffect.createOneShot(70L, VibrationEffect.DEFAULT_AMPLITUDE)
+                    VibrationEffect.createOneShot(80L, VibrationEffect.DEFAULT_AMPLITUDE)
                 )
             } else {
                 @Suppress("DEPRECATION")
-                vibrator?.vibrate(70L)
+                vibrator?.vibrate(80L)
             }
         } catch (_: Exception) {}
     }
 
     /**
-     * Double-tap pattern for UNDO or state recovery.
+     * Double-pulse pattern for UNDO or state recovery.
      */
     fun doublePulse() {
         try {
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-                val timings = longArrayOf(0, 35, 60, 35)
-                val amplitudes = intArrayOf(0, 200, 0, 200)
+                val timings = longArrayOf(0, 40, 50, 40)
+                val amplitudes = intArrayOf(0, 210, 0, 210)
                 vibrator?.vibrate(VibrationEffect.createWaveform(timings, amplitudes, -1))
             } else {
                 @Suppress("DEPRECATION")
                 vibrator?.vibrate(100L)
+            }
+        } catch (_: Exception) {}
+    }
+
+    /**
+     * Ultra-crisp subtle tick for physical and virtual rotating bezel movements.
+     */
+    fun rotaryTick() {
+        try {
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
+                vibrator?.vibrate(VibrationEffect.createPredefined(VibrationEffect.EFFECT_TICK))
+            } else {
+                @Suppress("DEPRECATION")
+                vibrator?.vibrate(10L)
+            }
+        } catch (_: Exception) {}
+    }
+
+    /**
+     * Ceremonial triple-burst vibration when a game, set, or match is won.
+     */
+    fun celebrateWin() {
+        try {
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+                val timings = longArrayOf(0, 60, 60, 60, 60, 120)
+                val amplitudes = intArrayOf(0, 200, 0, 220, 0, 255)
+                vibrator?.vibrate(VibrationEffect.createWaveform(timings, amplitudes, -1))
+            } else {
+                @Suppress("DEPRECATION")
+                vibrator?.vibrate(250L)
             }
         } catch (_: Exception) {}
     }

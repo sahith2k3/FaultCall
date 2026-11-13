@@ -1,25 +1,28 @@
 package com.faultcall.mobile.presentation.theme
 
-import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.material3.*
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.graphics.Color
 
-private val DarkColorScheme = darkColorScheme(
-    primary = TennisBallGreen,
+private val OneUiDarkColorScheme = darkColorScheme(
+    primary = TennisVolt,
     onPrimary = Color.Black,
-    primaryContainer = CourtGreen,
+    primaryContainer = CourtEmeraldDark,
     onPrimaryContainer = Color.White,
     secondary = AccentCyan,
     onSecondary = Color.Black,
-    error = FaultRed,
+    secondaryContainer = AccentCyanDim,
+    onSecondaryContainer = AccentCyan,
+    error = FaultCoral,
     onError = Color.White,
-    background = CharcoalDark,
+    background = OneUiBackground,
     onBackground = TextPrimary,
-    surface = CharcoalSurface,
+    surface = OneUiSurface,
     onSurface = TextPrimary,
-    surfaceVariant = CharcoalCard,
-    onSurfaceVariant = TextSecondary
+    surfaceVariant = OneUiSurfaceVariant,
+    onSurfaceVariant = TextSecondary,
+    outline = OneUiStroke,
+    outlineVariant = OneUiStrokeGlow
 )
 
 @Composable
@@ -27,7 +30,7 @@ fun FaultCallTheme(
     content: @Composable () -> Unit
 ) {
     MaterialTheme(
-        colorScheme = DarkColorScheme,
+        colorScheme = OneUiDarkColorScheme,
         content = content
     )
 }

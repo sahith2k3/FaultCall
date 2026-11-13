@@ -2,17 +2,45 @@ package com.faultcall.mobile.presentation.theme
 
 import androidx.compose.ui.graphics.Color
 
-val CharcoalDark = Color(0xFF121212)
-val CharcoalSurface = Color(0xFF1E1E1E)
-val CharcoalCard = Color(0xFF252525)
+// Samsung One UI 8/9 Deep OLED Dark Canvas
+val OneUiBackground = Color(0xFF08080A)
+val OneUiSurface = Color(0xFF13151A)
+val OneUiSurfaceVariant = Color(0xFF1A1D24)
+val OneUiSurfaceElevated = Color(0xFF222630)
+val OneUiStroke = Color(0xFF262A36)
+val OneUiStrokeGlow = Color(0xFF383E50)
 
-val TennisBallGreen = Color(0xFFC6FF00)
-val CourtGreen = Color(0xFF2E7D32)
-val FaultRed = Color(0xFFE53935)
-val FaultRedDark = Color(0xFFB71C1C)
-val AccentCyan = Color(0xFF00E5FF)
-val ServerAmber = Color(0xFFFFB300)
+// Flagship Sports Accents
+val TennisVolt = Color(0xFFD6FF00)           // Electric Grand Slam tennis ball neon
+val TennisVoltDim = Color(0x33D6FF00)
+val TennisVoltGlow = Color(0x66D6FF00)
 
-val TextPrimary = Color(0xFFF5F5F5)
-val TextSecondary = Color(0xFFB0B0B0)
-val TextMuted = Color(0xFF757575)
+val CourtEmerald = Color(0xFF00C853)          // Centre court vibrant emerald
+val CourtEmeraldDark = Color(0xFF00662A)
+val CourtEmeraldDim = Color(0x2A00C853)
+
+val FaultCoral = Color(0xFFFF3B30)            // High-visibility umpire call coral
+val FaultCoralDark = Color(0xFFD32F2F)
+val FaultCoralGlow = Color(0x4DFF3B30)
+
+val AccentCyan = Color(0xFF00E5FF)            // Precision telemetry cyan
+val AccentCyanDim = Color(0x2A00E5FF)
+
+val ServerAmber = Color(0xFFFFB300)           // Active server indicator
+val ServerAmberGlow = Color(0x4DFFB300)
+
+val WimbledonPurple = Color(0xFF4A1A6B)       // Rich tournament violet
+
+// Typography Hierarchy
+val TextPrimary = Color(0xFFF8F9FA)
+val TextSecondary = Color(0xFF9AA0A6)
+val TextMuted = Color(0xFF5F6368)
+
+// Legacy alias mappings for backwards compatibility
+val CharcoalDark = OneUiBackground
+val CharcoalSurface = OneUiSurface
+val CharcoalCard = OneUiSurfaceVariant
+val TennisBallGreen = TennisVolt
+val CourtGreen = CourtEmerald
+val FaultRed = FaultCoral
+val FaultRedDark = FaultCoralDark
